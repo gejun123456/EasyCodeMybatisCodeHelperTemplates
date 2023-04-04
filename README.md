@@ -6,7 +6,7 @@ Copy file from easyCode to intellij scratch file, then use generate from scratch
 
 ### 1. Copy file from easyCode to intellij scratch file
 
-![scratchFilePlace](https://images.brucege.com/scratchFilePlace.png)
+![scratchFilePlace](https://raw.githubusercontent.com/gejun123456/EasyCodeMybatisCodeHelperTemplates/master/pic/scratchFilePlace.png)
 
 ### 2. Use generate from scratch to generate code
-![genrateCode](https://images.brucege.com/generateFromScratchFile.png)
+![genrateCode](https://raw.githubusercontent.com/gejun123456/EasyCodeMybatisCodeHelperTemplates/master/pic/generateFromScratchFile.png)
