@@ -22,7 +22,7 @@
   {
     "matchType": "REGEX",
     "columnType": "decimal(\\(\\d+,\\d+\\))?",
-    "javaType": "java.lang.Double"
+    "javaType": "java.math.BigDecimal"
   },
   {
     "matchType": "ORDINARY",
