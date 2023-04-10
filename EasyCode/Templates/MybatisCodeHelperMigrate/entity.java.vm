@@ -2,6 +2,7 @@
 $!{define.vm}
 $!{mybatisCodehelper.vm}
 
+
 ##使用宏定义设置回调（保存位置与文件后缀）
 ###save("/entity", ".java")
 
