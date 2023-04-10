@@ -25,5 +25,14 @@
     "typeMapperName": "Default.json",
     "tableNameRegex": ".*",
     "schemaNameRegex": ".*"
+  },
+  {
+    "groupName": "MybatisPlus",
+    "templateName": "MybatisPlusMigrate",
+    "globalConfigName": "MybatisCodeHelperPro",
+    "columnConfigName": "Default.json",
+    "typeMapperName": "Default.json",
+    "tableNameRegex": ".*",
+    "schemaNameRegex": ".*"
   }
 ]
