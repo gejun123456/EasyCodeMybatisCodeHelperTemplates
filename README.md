@@ -15,3 +15,6 @@ require Intellij EasyCode-MybatisCodeHelper plugin version 1.2.9 or later.
 
 ### 2. Use generate from scratch to generate code
 ![genrateCode](https://raw.githubusercontent.com/gejun123456/EasyCodeMybatisCodeHelperTemplates/master/pic/generateFromScratchFile.png)
+
+### for version 1.3.0 later, you can just copy to project easyCode directory, so you can use git to version it.
+
