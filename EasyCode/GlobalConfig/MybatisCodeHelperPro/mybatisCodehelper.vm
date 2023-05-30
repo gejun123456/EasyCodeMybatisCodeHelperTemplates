@@ -18,3 +18,10 @@
 #set($addSchemaName=false)
 #set($mapperSuffix="Mapper")
 #set($daoSuffix="Mapper")
+#set($useActualColumName=false)
+
+#if($useActualColumName)
+    #foreach($column in $tableInfo.fullColumn)
+        $!column.setName($column.obj.name)
+    #end
+#end
