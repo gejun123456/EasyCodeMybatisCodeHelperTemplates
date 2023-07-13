@@ -21,10 +21,10 @@ public class $!{tableInfo.name}  {
 #foreach($column in $tableInfo.fullColumn)
     #if(${column.comment})//${column.comment}#end
 
-    #if(${column.obj.name} == "id")
-    @TableId(value = "id")
+    #if(${column.obj.name} == ${tableInfo.pkColumn.get(0).obj.name})
+    @TableId(value = "${column.obj.name}")
     #else
-    @TableField(value = ${column.obj.name})
+    @TableField(value = "${column.obj.name}")
     #end
     private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
 #end
