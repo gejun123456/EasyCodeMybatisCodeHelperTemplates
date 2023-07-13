@@ -25,3 +25,15 @@
         $!column.setName($column.obj.name)
     #end
 #end
+
+
+###foreach($column in $tableInfo.fullColumn)
+##    #set($propertyName=$column.obj.name)
+##    #set($propertyName=$propertyName.substring(0,1).toLowerCase()+$propertyName.substring(1))
+##    $!column.setName($propertyName)
+##    #if($propertyName.endsWith("ID"))
+##        #set($lenght=$propertyName.length() - 2)
+##        #set($theName=${propertyName.substring(0,$lenght)}+"Id")
+##        $!column.setName($theName)
+##    #end
+###end
