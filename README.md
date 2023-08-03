@@ -1,6 +1,6 @@
 ## Intellij EasyCodeMybatisCodeHelper plugin template files.
 
-Copy file from easyCode to intellij scratch file, then use generate from scratch to generate code.
+Copy file from easyCode to intellij scratch file Or Project EasyCode Folder, then use generate from easyCode folder from database table to generate code.
 
 ## Requirements
 
