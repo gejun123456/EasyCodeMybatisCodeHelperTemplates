@@ -31,6 +31,16 @@
 ##${tableInfo.setName($tool.append($tableInfo.getName(),$modelSuffix))}
 
 
+#*remove column prefix like when column is f_hello want generate hello, you can substring the column name*#
+###set($removeColumnPrefix="f_")
+###foreach($column in $tableInfo.fullColumn)
+##    #if($column.obj.name.startsWith($removeColumnPrefix))
+##        $!column.setName($tool.firstLowerCase($column.getName().substring(1)))
+##    #end
+###end
+
+
+
 ###foreach($column in $tableInfo.fullColumn)
 ##    #set($propertyName=$column.obj.name)
 ##    #set($propertyName=$propertyName.substring(0,1).toLowerCase()+$propertyName.substring(1))
