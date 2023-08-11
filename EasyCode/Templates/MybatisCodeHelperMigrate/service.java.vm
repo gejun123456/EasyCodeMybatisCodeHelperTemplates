@@ -1,6 +1,7 @@
 ##定义初始变量
 $!{mybatisCodehelper.vm}
 #set($serviceName = $tool.append($tableInfo.name, "Service"))
+#set($entityName = $tool.append($tableInfo.name,$modelSuffix))
 ##设置回调
 #set($serviceSavePath = $tool.append(${serviceSrcFolder},"/",${servicePackageName.replace(".","/")}))
 
@@ -14,10 +15,10 @@ $!callback.setFileName($tool.append($serviceName, ".java"))
 
 package $!{servicePackageName};
 
-import $!{modelPackageName}.$!{tableInfo.name};
+import $!{modelPackageName}.$!{entityName};
 
 /**
- * $!{tableInfo.comment}($!{tableInfo.name})表服务接口
+ * $!{tableInfo.comment}($!{tableInfo.obj.name})表服务接口
  *
  * @author $!author
  * @since $!time.currTime()
@@ -30,23 +31,23 @@ public interface $!{serviceName} {
      * @param $!pk.name 主键
      * @return 实例对象
      */
-    $!{tableInfo.name} queryById($!pk.shortType $!pk.name);
+    $!{entityName} queryById($!pk.shortType $!pk.name);
 
     /**
      * 新增数据
      *
-     * @param $!tool.firstLowerCase($!{tableInfo.name}) 实例对象
+     * @param $!tool.firstLowerCase($!{entityName}) 实例对象
      * @return 实例对象
      */
-    $!{tableInfo.name} insert($!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name}));
+    $!{entityName} insert($!{entityName} $!tool.firstLowerCase($!{entityName}));
 
     /**
      * 修改数据
      *
-     * @param $!tool.firstLowerCase($!{tableInfo.name}) 实例对象
+     * @param $!tool.firstLowerCase($!{entityName}) 实例对象
      * @return 实例对象
      */
-    $!{tableInfo.name} update($!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name}));
+    $!{entityName} update($!{entityName} $!tool.firstLowerCase($!{entityName}));
 
     /**
      * 通过主键删除数据

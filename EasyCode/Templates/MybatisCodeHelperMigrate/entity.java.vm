@@ -13,7 +13,8 @@ $!{mybatisCodehelper.vm}
 #set($entitySavePath = $tool.append(${javamodelSrcFolder},"/",${modelPackageName.replace(".","/")}))
 
 $!callback.setSavePath($entitySavePath)
-$!callback.setFileName($tool.append($tableInfo.name, ".java"))
+
+$!callback.setFileName($tool.append($entityName, ".java"))
 ##使用宏定义设置包后缀
 package ${modelPackageName};
 ##使用全局变量实现默认包导入
@@ -40,12 +41,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 #end
 
 #if($useSwagger)
-@ApiModel(value = "$!{tableInfo.name}", description = "$!{tableInfo.comment}")
+@ApiModel(value = "$!{entityName}", description = "$!{tableInfo.comment}")
 #end
 #if($useOpenApi)
-@Schema(name = "$!{tableInfo.name}", description = "$!{tableInfo.comment}")
+@Schema(name = "$!{entityName}", description = "$!{tableInfo.comment}")
 #end
-public class $!{tableInfo.name} implements Serializable {
+public class $!{entityName} implements Serializable {
     private static final long serialVersionUID = $!tool.serial();
 #foreach($column in $tableInfo.fullColumn)
     #if(${column.comment})/**

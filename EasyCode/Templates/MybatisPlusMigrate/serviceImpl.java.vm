@@ -15,7 +15,7 @@ $!callback.setFileName($tool.append($ServiceImplName, ".java"))
 
 package $!{serviceImplPackageName};
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import $!{modelPackageName}.$!{tableInfo.name};
+import $!{modelPackageName}.$!{entityName};
 import ${mapperPackageName}.${daoName};
 import ${servicePackageName}.$!{tableInfo.name}Service;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,6 @@ import org.springframework.stereotype.Service;
 ##表注释（宏定义）
 #tableComment("表服务实现类")
 @Service("$!tool.firstLowerCase($tableInfo.name)Service")
-public class $!{ServiceImplName} extends ServiceImpl<$!{daoName}, $!{tableInfo.name}> implements $!{tableInfo.name}Service {
+public class $!{ServiceImplName} extends ServiceImpl<$!{daoName}, $!{entityName}> implements $!{tableInfo.name}Service {
 
 }

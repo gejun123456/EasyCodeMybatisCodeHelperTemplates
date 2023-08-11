@@ -17,14 +17,14 @@ $!callback.setFileName($tool.append($ServiceImplName, ".java"))
 
 package $!{serviceImplPackageName};
 
-import $!{modelPackageName}.$!{tableInfo.name};
+import $!{modelPackageName}.$!{entityName};
 import ${mapperPackageName}.${daoName};
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 /**
- * $!{tableInfo.comment}($!{tableInfo.name})表服务实现类
+ * $!{tableInfo.comment}($!{tableInfo.obj.name})表服务实现类
  *
  * @author $!author
  * @since $!time.currTime()
@@ -40,30 +40,30 @@ public class $!{ServiceImplName} {
      * @param $!pk.name 主键
      * @return 实例对象
      */
-    public $!{tableInfo.name} queryById($!pk.shortType $!pk.name) {
+    public $!{entityName} queryById($!pk.shortType $!pk.name) {
         return this.$!{tool.firstLowerCase($daoName)}.selectByPrimaryKey($!pk.name);
     }
 
     /**
      * 新增数据
      *
-     * @param $!tool.firstLowerCase($!{tableInfo.name}) 实例对象
+     * @param $!tool.firstLowerCase($!{entityName}) 实例对象
      * @return 实例对象
      */
-    public $!{tableInfo.name} insert($!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name})) {
-        this.$!{tool.firstLowerCase($daoName)}.insert($!tool.firstLowerCase($!{tableInfo.name}));
-        return $!tool.firstLowerCase($!{tableInfo.name});
+    public $!{entityName} insert($!{entityName} $!tool.firstLowerCase($!{entityName})) {
+        this.$!{tool.firstLowerCase($daoName)}.insert($!tool.firstLowerCase($!{entityName}));
+        return $!tool.firstLowerCase($!{entityName});
     }
 
     /**
      * 修改数据
      *
-     * @param $!tool.firstLowerCase($!{tableInfo.name}) 实例对象
+     * @param $!tool.firstLowerCase($!{entityName}) 实例对象
      * @return 实例对象
      */
-    public $!{tableInfo.name} update($!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name})) {
-        this.$!{tool.firstLowerCase($daoName)}.update($!tool.firstLowerCase($!{tableInfo.name}));
-        return this.queryById($!{tool.firstLowerCase($!{tableInfo.name})}.get$!tool.firstUpperCase($pk.name)());
+    public $!{entityName} update($!{entityName} $!tool.firstLowerCase($!{entityName})) {
+        this.$!{tool.firstLowerCase($daoName)}.update($!tool.firstLowerCase($!{entityName}));
+        return this.queryById($!{tool.firstLowerCase($!{entityName})}.get$!tool.firstUpperCase($pk.name)());
     }
 
     /**

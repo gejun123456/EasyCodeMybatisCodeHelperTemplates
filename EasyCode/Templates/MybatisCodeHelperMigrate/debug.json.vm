@@ -1,6 +1,16 @@
 // 禁止将生成结果写入到文件
 $!callback.setWriteFile(false)
 
+
+#foreach($column in $tableInfo.fullColumn)
+    ${tableInfo.obj.name}.$column.obj.name#if($foreach) as `${tableInfo.obj.name}_${column.obj.name}`,
+#end#end
+
+
+
+
+
+
 AllColumns is following:
 #foreach($column in $tableInfo.fullColumn)$column.obj.name#if($foreach.hasNext), #end#end
 

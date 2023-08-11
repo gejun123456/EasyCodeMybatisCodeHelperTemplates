@@ -12,10 +12,8 @@ $!callback.setFileName($tool.append($controllerName, ".java"))
 
 ##定义服务名
 #set($serviceName = $!tool.append($!tool.firstLowerCase($!tableInfo.name), "Service"))
-
+#set($entityVariableName = $!tool.firstLowerCase($!entityName))
 ##定义实体对象名
-#set($entityName = $!tool.firstLowerCase($!tableInfo.name))
-
 package ${controllerPackageName};
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
@@ -58,8 +56,8 @@ public class $!{tableName} extends ApiController {
      * @return 新增结果
      */
     @PostMapping
-    public R insert(@RequestBody $!tableInfo.name $!entityName) {
-        return success(this.$!{serviceName}.save($!entityName));
+    public R insert(@RequestBody $!entityName $!entityVariableName) {
+        return success(this.$!{serviceName}.save($!entityVariableName));
     }
 
     /**
@@ -69,8 +67,8 @@ public class $!{tableName} extends ApiController {
      * @return 修改结果
      */
     @PutMapping
-    public R update(@RequestBody $!tableInfo.name $!entityName) {
-        return success(this.$!{serviceName}.updateById($!entityName));
+    public R update(@RequestBody $!entityName $!entityVariableName) {
+        return success(this.$!{serviceName}.updateById($!entityVariableName));
     }
 
     /**

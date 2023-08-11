@@ -19,12 +19,20 @@
 #set($mapperSuffix="Mapper")
 #set($daoSuffix="Mapper")
 #set($useActualColumName=false)
+#set($modelSuffix="Model")
+#set($entityName = $tool.append($tableInfo.name,$modelSuffix))
 
 #if($useActualColumName)
     #foreach($column in $tableInfo.fullColumn)
         $!column.setName($column.obj.name)
     #end
 #end
+
+#*remove table prefix*#
+###set($removeTablePrefix="table_")
+###if($tableInfo.obj.name.startsWith("table_"))
+##    $!tableInfo.setName($tableInfo.obj.name.substring(5))
+###end
 
 #*add model Suffix to model name*#
 ###set($modelSuffix="Model")

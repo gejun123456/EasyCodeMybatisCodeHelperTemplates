@@ -14,10 +14,10 @@ $!callback.setFileName($tool.append($serviceName, ".java"))
 
 package $!{servicePackageName};
 import com.baomidou.mybatisplus.extension.service.IService;
-import $!{modelPackageName}.$!{tableInfo.name};
+import $!{modelPackageName}.$!{entityName};
 
 ##表注释（宏定义）
 #tableComment("表服务接口")
-public interface $!{serviceName} extends IService<$!tableInfo.name> {
+public interface $!{serviceName} extends IService<$!entityName> {
 
 }

@@ -17,13 +17,18 @@ $!callback.setFileName($tool.append($!{tableInfo.name}, $!{mapperSuffix},".xml")
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="$!{tableInfo.savePackageName}.dao.$!{tableInfo.name}Dao">
+<mapper namespace="${mapperPackageName}.${daoName}">
 
-    <resultMap type="$!{tableInfo.savePackageName}.entity.$!{tableInfo.name}" id="$!{tableInfo.name}Map">
-#foreach($column in $tableInfo.fullColumn)
-        <result property="$!column.name" column="$!column.obj.name" jdbcType="$!column.ext.jdbcType"/>
-#end
+    <resultMap id="BaseResultMap" type="$!{modelPackageName}.$!{entityName}">
+        <!--@Table $!{tableInfo.obj.name}-->
+        #foreach($column in $tableInfo.fullColumn)
+            <result property="$!column.name" column="$!column.obj.name" jdbcType="$!column.ext.jdbcType"/>
+        #end
     </resultMap>
+
+    <sql id="Base_Column_List">
+        #allSqlColumn()
+    </sql>
 
     <!-- 批量插入 -->
     <insert id="insertBatch" keyProperty="$!pk.name" useGeneratedKeys="true">

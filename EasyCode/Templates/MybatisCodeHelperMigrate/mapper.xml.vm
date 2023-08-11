@@ -18,7 +18,7 @@ $!callback.setFileName($tool.append($!{tableInfo.name}, $!{mapperSuffix},".xml")
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${mapperPackageName}.${daoName}">
 
-    <resultMap id="BaseResultMap" type="$!{modelPackageName}.$!{tableInfo.name}">
+    <resultMap id="BaseResultMap" type="$!{modelPackageName}.$!{entityName}">
         <!--@Table $!{tableInfo.obj.name}-->
 #foreach($column in $tableInfo.fullColumn)
         <result property="$!column.name" column="$!column.obj.name" jdbcType="$!column.ext.jdbcType"/>
@@ -28,6 +28,8 @@ $!callback.setFileName($tool.append($!{tableInfo.name}, $!{mapperSuffix},".xml")
     <sql id="Base_Column_List">
         #allSqlColumn()
     </sql>
+
+
 
     <!--查询单个-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap">
@@ -81,7 +83,6 @@ $!callback.setFileName($tool.append($!{tableInfo.name}, $!{mapperSuffix},".xml")
 #end
         </trim>
     </insert>
-
     <insert id="insertBatch" keyProperty="$!pk.name" useGeneratedKeys="true">
         insert into $!{tableInfo.obj.name}(#foreach($column in $tableInfo.otherColumn)$!column.obj.name#if($foreach.hasNext), #end#end)
         values

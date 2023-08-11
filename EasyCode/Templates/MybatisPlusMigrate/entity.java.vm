@@ -22,12 +22,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 @Data
 #end
 #if($useSwagger)
-@ApiModel(value = "$!{tableInfo.name}", description = "$!{tableInfo.comment}")
+@ApiModel(value = "$!{entityName}", description = "$!{tableInfo.comment}")
 #end
 #if($useOpenApi)
-@Schema(name = "$!{tableInfo.name}", description = "$!{tableInfo.comment}")
+@Schema(name = "$!{entityName}", description = "$!{tableInfo.comment}")
 #end
-public class $!{tableInfo.name}  {
+public class $!{entityName}  {
 #foreach($column in $tableInfo.fullColumn)
     #if(${column.comment})/**
      * ${column.comment}
