@@ -13,14 +13,14 @@ $!callback.setFileName($tool.append($controllerName, ".java"))
 
 package ${controllerPackageName};
 
-import $!{modelPackageName}.$!{tableInfo.name};
+import $!{modelPackageName}.$!{entityName};
 import ${servicePackageName}.$!{tableInfo.name}Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 /**
- * $!{tableInfo.comment}($!{tableInfo.name})表控制层
+ * $!{tableInfo.comment}($!{tableInfo.obj.name})表控制层
  *
  * @author $!author
  * @since $!time.currTime()
@@ -42,7 +42,7 @@ public class $!{controllerName} {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<$!{tableInfo.name}> queryById(@PathVariable("id") $!pk.shortType id) {
+    public ResponseEntity<$!{entityName}> queryById(@PathVariable("id") $!pk.shortType id) {
         return ResponseEntity.ok(this.$!{tool.firstLowerCase($tableInfo.name)}Service.queryById(id));
     }
 
@@ -53,7 +53,7 @@ public class $!{controllerName} {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<$!{tableInfo.name}> add($!{tableInfo.name} $!{tool.firstLowerCase($tableInfo.name)}) {
+    public ResponseEntity<$!{entityName}> add($!{tableInfo.name} $!{tool.firstLowerCase($tableInfo.name)}) {
         return ResponseEntity.ok(this.$!{tool.firstLowerCase($tableInfo.name)}Service.insert($!{tool.firstLowerCase($tableInfo.name)}));
     }
 
@@ -64,8 +64,8 @@ public class $!{controllerName} {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<$!{tableInfo.name}> edit($!{tableInfo.name} $!{tool.firstLowerCase($tableInfo.name)}) {
-        return ResponseEntity.ok(this.$!{tool.firstLowerCase($tableInfo.name)}Service.update($!{tool.firstLowerCase($tableInfo.name)}));
+    public ResponseEntity<$!{entityName}> edit($!{entityName} $!{tool.firstLowerCase($entityName)}) {
+        return ResponseEntity.ok(this.$!{tool.firstLowerCase($tableInfo.name)}Service.update($!{tool.firstLowerCase($entityName)}));
     }
 
     /**
