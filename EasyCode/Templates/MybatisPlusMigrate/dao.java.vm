@@ -18,7 +18,7 @@ import $!{modelPackageName}.$!{tableInfo.name};
 
 ##表注释（宏定义）
 #tableComment("表数据库访问层")
-public interface $!{daoName} extends BaseMapper<$!tableInfo.name> {
+public interface $!{daoName} extends BaseMapper<$!entityName> {
 
 /**
 * 批量新增数据（MyBatis原生foreach方法）
