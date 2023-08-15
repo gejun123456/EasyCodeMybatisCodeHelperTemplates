@@ -25,6 +25,11 @@
     "javaType": "java.math.BigDecimal"
   },
   {
+    "matchType": "REGEX",
+    "columnType": "decimal(\\(\\d+\\))?",
+    "javaType": "java.lang.Long"
+  },
+  {
     "matchType": "ORDINARY",
     "columnType": "integer",
     "javaType": "java.lang.Integer"

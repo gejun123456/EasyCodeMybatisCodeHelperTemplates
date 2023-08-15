@@ -42,20 +42,20 @@ public class $!{ServiceImplName} implements $!{tableInfo.name}Service {
      * @return 实例对象
      */
     @Override
-    public $!{tableInfo.name} queryById($!pk.shortType $!pk.name) {
+    public $!{entityName} queryById($!pk.shortType $!pk.name) {
         return this.$!{tool.firstLowerCase($daoName)}.selectByPrimaryKey($!pk.name);
     }
 
     /**
      * 新增数据
      *
-     * @param $!tool.firstLowerCase($!{tableInfo.name}) 实例对象
+     * @param $!tool.firstLowerCase($!{entityName}) 实例对象
      * @return 实例对象
      */
     @Override
-    public $!{tableInfo.name} insert($!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name})) {
-        this.$!{tool.firstLowerCase($daoName)}.insert($!tool.firstLowerCase($!{tableInfo.name}));
-        return $!tool.firstLowerCase($!{tableInfo.name});
+    public $!{entityName} insert($!{entityName} $!tool.firstLowerCase($!{entityName})) {
+        this.$!{tool.firstLowerCase($daoName)}.insert($!tool.firstLowerCase($!{entityName}));
+        return $!tool.firstLowerCase($!{entityName});
     }
 
     /**
@@ -65,9 +65,9 @@ public class $!{ServiceImplName} implements $!{tableInfo.name}Service {
      * @return 实例对象
      */
     @Override
-    public $!{tableInfo.name} update($!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name})) {
-        this.$!{tool.firstLowerCase($daoName)}.update($!tool.firstLowerCase($!{tableInfo.name}));
-        return this.queryById($!{tool.firstLowerCase($!{tableInfo.name})}.get$!tool.firstUpperCase($pk.name)());
+    public $!{entityName} update($!{entityName} $!tool.firstLowerCase($!{entityName})) {
+        this.$!{tool.firstLowerCase($daoName)}.update($!tool.firstLowerCase($!{entityName}));
+        return this.queryById($!{tool.firstLowerCase($!{entityName})}.get$!tool.firstUpperCase($pk.name)());
     }
 
     /**
@@ -78,6 +78,6 @@ public class $!{ServiceImplName} implements $!{tableInfo.name}Service {
      */
     @Override
     public boolean deleteById($!pk.shortType $!pk.name) {
-        return this.$!{tool.firstLowerCase($daoName)}.deleteById($!pk.name) > 0;
+        return this.$!{tool.firstLowerCase($daoName)}.deleteByPrimaryKey($!pk.name) > 0;
     }
 }

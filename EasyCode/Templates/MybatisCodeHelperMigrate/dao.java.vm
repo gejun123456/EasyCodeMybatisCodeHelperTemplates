@@ -90,6 +90,6 @@ public interface $!{daoName} {
      * @param $!pk.name 主键
      * @return 影响行数
      */
-    int deleteById($!pk.shortType $!pk.name);
+    int deleteByPrimaryKey($!pk.shortType $!pk.name);
 
 }
