@@ -5,7 +5,7 @@ $!{mybatisCodehelper.vm}
 #set($entitySavePath = $tool.append(${javamodelSrcFolder},"/",${modelPackageName.replace(".","/")}))
 
 $!callback.setSavePath($entitySavePath)
-$!callback.setFileName($tool.append($tableInfo.name, ".java"))
+$!callback.setFileName($tool.append($entityName, ".java"))
 
 ##自动导入包（全局变量）
 package ${modelPackageName};

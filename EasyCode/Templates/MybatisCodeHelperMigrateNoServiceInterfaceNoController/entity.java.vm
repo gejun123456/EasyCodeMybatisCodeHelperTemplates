@@ -9,7 +9,7 @@ $!{mybatisCodehelper.vm}
 #set($entitySavePath = $tool.append(${javamodelSrcFolder},"/",${modelPackageName.replace(".","/")}))
 
 $!callback.setSavePath($entitySavePath)
-$!callback.setFileName($tool.append($tableInfo.name, ".java"))
+$!callback.setFileName($tool.append($entityName, ".java"))
 ##使用宏定义设置包后缀
 package ${modelPackageName};
 ##使用全局变量实现默认包导入
