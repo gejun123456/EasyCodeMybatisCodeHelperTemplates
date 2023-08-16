@@ -1,0 +1,82 @@
+##导入宏定义
+$!{define.vm}
+$!{jpa.vm}
+
+
+#set($entitySavePath = $tool.append(${javamodelSrcFolder},"/",${modelPackageName.replace(".","/")}))
+
+$!callback.setSavePath($entitySavePath)
+$!callback.setFileName($tool.append($entityName, ".java"))
+
+##自动导入包（全局变量）
+package ${modelPackageName};
+$!{autoImport.vm}
+#if($useJarkataAnntation)
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+#else
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+#end
+import java.io.Serializable;
+
+#if(${useLombok})
+import lombok.Data;
+#end
+#if($useSwagger)
+import io.swagger.annotations.ApiModel;
+#end
+#if($useOpenApi)
+import io.swagger.v3.oas.annotations.media.Schema;
+#end
+$!{autoImport.vm}
+
+#tableComment("entity class")
+@Entity
+@Table(name= "$!{tableInfo.obj.name}")
+#if(${useLombok})
+@Data
+#end
+#if($useSwagger)
+@ApiModel(value = "$!{entityName}" , description = "$!{tableInfo.comment}" )
+#end
+#if($useOpenApi)
+@Schema(name = "$!{entityName}" , description = "$!{tableInfo.comment}" )
+#end
+#set($superClassFields = ["adminId","adminType"])
+public class $!{entityName} {
+#foreach($column in $tableInfo.pkColumn)
+    #if(${column.comment})//${column.comment}#end
+
+#if($superClassFields.contains($column.name))
+    #else
+    @Id
+    @Column(name = "$!{column.obj.name}")
+#if($useSwagger)
+    @ApiModelProperty(value = "${column.comment}" )
+#end
+#if($useOpenApi)
+    @Schema(description = "${column.comment}" )
+#end
+    private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+    #foreach($column in $tableInfo.otherColumn)
+#if(${column.comment})//${column.comment}#end
+
+#if($superClassFields.contains($column.name))
+
+#else
+    @Column(name = "$!{column.obj.name}")
+    private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+    #end
+#end
+
+#foreach($column in $tableInfo.fullColumn)
+    #getSetMethod($column)
+#end
+}

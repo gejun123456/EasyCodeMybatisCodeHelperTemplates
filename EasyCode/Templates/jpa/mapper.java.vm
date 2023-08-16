@@ -1,0 +1,49 @@
+$!{define.vm}
+$!{jpa.vm}
+
+
+#set($mapperSavePath = $tool.append(${mapperSrcFolder},"/",${mapperPackageName.replace(".","/")}))
+
+$!callback.setSavePath($mapperSavePath)
+$!callback.setFileName($tool.append($mapperClassName, ".java"))
+
+package ${mapperPackageName};
+
+import ${modelPackageName}.${entityName};
+
+import ${dtoPackageName}.${dtoClassName};
+
+import java.util.List;
+
+#if($useMapStruct)
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+import org.mapstruct.MappingTarget;
+#end
+
+#set($class="class")
+#if($useMapStruct)
+#set($class="interface")
+#end
+#tableComment("mapper")
+public ${class} ${mapperClassName} {
+
+#if($useMapStruct)
+    public static ${mapperClassName} INSTANCE = Mappers.getMapper(${mapperClassName}.class);
+
+#set($entityNameLower= $tool.firstLowerCase(${entityName}))
+    ${dtoClassName} toDto(${entityName} ${entityNameLower});
+
+#set($dtoClassLower= $tool.firstLowerCase(${dtoClassName}))
+    ${entityName} toEntity(${dtoClassName} ${dtoClassLower});
+
+    void mergeToEntity(${dtoClassName} ${dtoClassLower}, @MappingTarget ${entityName} ${entityNameLower});
+    #end
+
+}
+
+
+
+##should support beanUtils mapStruct, get set converter ect.
+
+

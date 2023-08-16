@@ -1,0 +1,68 @@
+$!{define.vm}
+$!{jpa.vm}
+
+#set($serviceSavePath = $tool.append(${serviceImplSrcFolder},"/",${serviceImplPackageName.replace(".","/")}))
+
+$!callback.setSavePath($serviceSavePath)
+$!callback.setFileName($tool.append($serviceClassName, ".java"))
+package ${serviceImplPackageName};
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ${modelPackageName}.${entityName};
+import ${dtoPackageName}.${dtoClassName};
+
+import ${repositoryPackageName}.${repositoryClassName};
+
+import java.util.List;
+import java.util.Optional;
+import ${mapperPackageName}.${mapperClassName};
+#tableComment("service class")
+#set($repositoryVariableName=$tool.firstLowerCase($repositoryClassName))
+#set($entityVariableName=$tool.firstLowerCase($entityName))
+
+@Service
+public class ${serviceClassName}{
+
+    @Autowired
+    private ${repositoryClassName} ${repositoryVariableName};
+
+#set($dtoClassVariableName=$tool.firstLowerCase($dtoClassName))
+    public ${entityName} create(${dtoClassName} ${dtoClassVariableName}) {
+#if($useMapStruct)
+        ${entityName} ${entityVariableName} = ${mapperClassName}.INSTANCE.toEntity(${dtoClassVariableName});
+#end
+        return ${repositoryVariableName}.save(${entityVariableName});
+    }
+
+
+    public void delete(${pkType} id) {
+        ${repositoryVariableName}.findById(id)
+        .ifPresent(${repositoryVariableName}::delete);
+    }
+
+
+    public Optional<${entityName}> update(${dtoClassName} ${dtoClassVariableName},${pkType} id) {
+        Optional<${entityName}> optional${entityName} =  ${repositoryVariableName}.findById(id);
+        //set field to it.
+        if(optional${entityName}.isPresent()){
+            ${entityName} ${entityVariableName} = optional${entityName}.get();
+            ${mapperClassName}.INSTANCE.mergeToEntity(${dtoClassVariableName},${entityVariableName});
+            return Optional.of(${repositoryVariableName}.save(${entityVariableName}));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+
+    public Optional<${entityName}> get(${pkType} id) {
+        return ${repositoryVariableName}.findById(id);
+    }
+
+
+    public List<${entityName}> list() {
+        return StreamSupport.stream(${repositoryVariableName}.findAll().spliterator(),false).collect(Collectors.toList());
+    }
+
+
+}

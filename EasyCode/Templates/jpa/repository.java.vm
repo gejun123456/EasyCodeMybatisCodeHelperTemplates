@@ -1,0 +1,21 @@
+$!{define.vm}
+$!{jpa.vm}
+
+
+#set($repositorySavePath = $tool.append(${repositorySrcFolder},"/",${repositoryPackageName.replace(".","/")}))
+
+$!callback.setSavePath($repositorySavePath)
+$!callback.setFileName($tool.append($repositoryClassName, ".java"))
+package ${repositoryPackageName};
+
+import ${modelPackageName}.${entityName};
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
+import org.springframework.stereotype.Repository;
+#tableComment("repository class")
+#set($pkType=$tableInfo.pkColumn.get(0).shortType)
+@Repository
+public interface ${repositoryClassName} extends CrudRepository<${entityName}, ${pkType}>, QueryByExampleExecutor<${entityName}> {
+
+
+}

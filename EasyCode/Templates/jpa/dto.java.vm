@@ -1,0 +1,70 @@
+##导入宏定义
+$!{define.vm}
+$!{jpa.vm}
+
+
+#set($dtoSavePath = $tool.append(${dtoSrcFolder},"/",${dtoPackageName.replace(".","/")}))
+
+$!callback.setSavePath($dtoSavePath)
+$!callback.setFileName($tool.append($dtoClassName, ".java"))
+##自动导入包（全局变量）
+package ${dtoPackageName};
+$!{autoImport.vm}
+import java.io.Serializable;
+
+#if(${useLombok})
+import lombok.Data;
+#end
+#if($useSwagger)
+import io.swagger.annotations.ApiModel;
+#end
+#if($useOpenApi)
+import io.swagger.v3.oas.annotations.media.Schema;
+#end
+
+#tableComment("entity class")
+#if(${useLombok})
+@Data
+#end
+#if($useSwagger)
+    @ApiModel(value = "$!{tableInfo.name}" , description = "$!{tableInfo.comment}" )
+#end
+#if($useOpenApi)
+    @Schema(name = "$!{tableInfo.name}" , description = "$!{tableInfo.comment}" )
+#end
+#set($superClassFields = ["adminId","adminType"])
+public class $!{dtoClassName} {
+#foreach($column in $tableInfo.pkColumn)
+#if(${column.comment})//${column.comment}#end
+
+#if($superClassFields.contains($column.name))
+#else
+#if($useSwagger)
+    @ApiModelProperty(value = "${column.comment}" )
+#end
+#if($useOpenApi)
+    @Schema(description = "${column.comment}" )
+#end
+    private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    #end
+#foreach($column in $tableInfo.otherColumn)
+#if(${column.comment})//${column.comment}#end
+
+#if($superClassFields.contains($column.name))
+
+#else
+#if($useSwagger)
+    @ApiModelProperty(value = "${column.comment}" )
+#end
+#if($useOpenApi)
+    @Schema(description = "${column.comment}" )
+#end
+    private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+#end
+    #end
+#end
+
+#foreach($column in $tableInfo.fullColumn)
+    #getSetMethod($column)
+#end
+}

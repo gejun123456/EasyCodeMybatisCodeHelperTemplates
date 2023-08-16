@@ -1,0 +1,57 @@
+
+$!{define.vm}
+$!{jpa.vm}
+
+#set($serviceSavePath = $tool.append(${controllerSrcFolder},"/",${controllerPackageName.replace(".","/")}))
+
+$!callback.setSavePath($serviceSavePath)
+$!callback.setFileName($tool.append($controllerClassName, ".java"))
+package ${controllerPackageName};
+$!{autoImport.vm}
+import ${modelPackageName}.${entityName};
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import ${dtoPackageName}.$dtoClassName;
+
+import ${serviceImplPackageName}.${serviceClassName};
+import java.util.List;
+import java.util.Optional;
+
+#tableComment("controller class")
+#set($entityNameLower=$tool.firstLowerCase($tableInfo.name))
+#set($dtoVariableName=$tool.firstLowerCase($dtoClassName))
+@RestController
+@RequestMapping("/${entityNameLower}")
+public class ${controllerClassName} {
+
+    @Autowired
+#set($serviceVariableName=$tool.firstLowerCase($serviceClassName))
+    private ${serviceClassName} ${serviceVariableName};
+
+    @PostMapping
+    public ${entityName} create(${dtoClassName} ${dtoVariableName}) {
+        return ${serviceVariableName}.create(${dtoVariableName});
+    }
+
+    @DeleteMapping
+    public void delete(${pkType} id) {
+        ${serviceVariableName}.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public Optional<${entityName}> update(@RequestBody ${dtoClassName} ${dtoVariableName},
+    @PathVariable("id") ${pkType} id) {
+        return ${serviceVariableName}.update(${dtoVariableName}, id);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<${entityName}> get(${pkType} id) {
+        return ${serviceVariableName}.get(id);
+    }
+
+    @GetMapping
+    public List<${entityName}> list() {
+        return ${serviceVariableName}.list();
+    }
+
+}

@@ -1,2 +1,6 @@
 .idea/
 *.iml
+/src/main/java
+/src/main/resources
+/target
+EasyCode.zip

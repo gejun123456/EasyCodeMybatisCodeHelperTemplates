@@ -34,5 +34,14 @@
     "typeMapperName": "Default.json",
     "tableNameRegex": ".*",
     "schemaNameRegex": ".*"
+  },
+  {
+    "groupName": "jpa",
+    "templateName": "jpa",
+    "globalConfigName": "jpa",
+    "columnConfigName": "Default.json",
+    "typeMapperName": "Default.json",
+    "tableNameRegex": ".*",
+    "schemaNameRegex": ".*"
   }
 ]
