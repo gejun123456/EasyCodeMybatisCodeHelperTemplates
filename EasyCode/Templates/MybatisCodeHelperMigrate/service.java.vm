@@ -1,7 +1,6 @@
 ##定义初始变量
 $!{mybatisCodehelper.vm}
 #set($serviceName = $tool.append($tableInfo.name, "Service"))
-#set($entityName = $tool.append($tableInfo.name,$modelSuffix))
 ##设置回调
 #set($serviceSavePath = $tool.append(${serviceSrcFolder},"/",${servicePackageName.replace(".","/")}))
 
