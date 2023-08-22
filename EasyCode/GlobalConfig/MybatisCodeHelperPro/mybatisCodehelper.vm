@@ -19,8 +19,7 @@
 #set($mapperSuffix="Mapper")
 #set($daoSuffix="Mapper")
 #set($useActualColumName=false)
-#set($modelSuffix="VO")
-#set($entityName = $tool.append($tableInfo.name,$modelSuffix))
+#set($modelSuffix="Entity")
 
 #if($useActualColumName)
     #foreach($column in $tableInfo.fullColumn)
@@ -29,10 +28,13 @@
 #end
 
 #*remove table prefix*#
-###set($removeTablePrefix="table_")
-###if($tableInfo.obj.name.startsWith("table_"))
-##    $!tableInfo.setName($tableInfo.obj.name.substring(5))
-###end
+###set($removeTablePrefix="sys_")
+#set($entityName=$tableInfo.name)
+#if($tableInfo.obj.name.startsWith("sys_"))
+    #set($entityName = ${tableInfo.name.substring(3)})
+#end
+#set($entityName = $tool.append($entityName,$modelSuffix))
+
 
 #*add model Suffix to model name*#
 ###set($modelSuffix="Model")
