@@ -54,7 +54,7 @@ public class $!{controllerName} {
      */
     @PostMapping
     public ResponseEntity<$!{entityName}> add($!{entityName} $!{tool.firstLowerCase($entityName)}) {
-        return ResponseEntity.ok(this.$!{tool.firstLowerCase($tableInfo.name)}Service.insert($!{tool.firstLowerCase($tableInfo.name)}));
+        return ResponseEntity.ok(this.$!{tool.firstLowerCase($tableInfo.name)}Service.insert($!{tool.firstLowerCase($entityName)}));
     }
 
     /**
