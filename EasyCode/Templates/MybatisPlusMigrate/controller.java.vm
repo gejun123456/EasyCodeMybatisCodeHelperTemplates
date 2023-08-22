@@ -31,7 +31,7 @@ import java.util.List;
 #tableComment("表控制层")
 @RestController
 @RequestMapping("$!tool.firstLowerCase($!tableInfo.name)")
-public class $!{tableName} extends ApiController {
+public class $!{controllerName} extends ApiController {
     /**
      * 服务对象
      */
