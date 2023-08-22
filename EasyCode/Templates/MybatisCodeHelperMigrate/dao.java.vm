@@ -37,7 +37,7 @@ public interface $!{daoName} {
     /**
      * 统计总行数
      *
-     * @param $!tool.firstLowerCase($!{tableInfo.name}) 查询条件
+     * @param $!tool.firstLowerCase($!{entityName}) 查询条件
      * @return 总行数
      */
     long count($!{entityName} $!tool.firstLowerCase($!{entityName}));
@@ -62,27 +62,27 @@ public interface $!{daoName} {
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *
-     * @param entities List<$!{tableInfo.name}> 实例对象列表
+     * @param entities List<$!{entityName}> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<$!{tableInfo.name}> entities);
+    int insertBatch(@Param("entities") List<$!{entityName}> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
      *
-     * @param entities List<$!{tableInfo.name}> 实例对象列表
+     * @param entities List<$!{entityName}> 实例对象列表
      * @return 影响行数
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
-    int insertOrUpdateBatch(@Param("entities") List<$!{tableInfo.name}> entities);
+    int insertOrUpdateBatch(@Param("entities") List<$!{entityName}> entities);
 
     /**
      * 修改数据
      *
-     * @param $!tool.firstLowerCase($!{tableInfo.name}) 实例对象
+     * @param $!tool.firstLowerCase($!{entityName}) 实例对象
      * @return 影响行数
      */
-    int update($!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name}));
+    int update($!{entityName} $!tool.firstLowerCase($!{entityName}));
 
     /**
      * 通过主键删除数据

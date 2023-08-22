@@ -1,6 +1,6 @@
 [
   {
-    "groupName": "MybatisCodeHelperMigrateWithControllerNoServiceInterfaceCopy",
+    "groupName": "MybatisWithControllerNoServiceInterface",
     "templateName": "MybatisCodeHelperMigrateWithControllerNoServiceInterfaceCopy",
     "globalConfigName": "MybatisCodeHelperPro",
     "columnConfigName": "Default.json",

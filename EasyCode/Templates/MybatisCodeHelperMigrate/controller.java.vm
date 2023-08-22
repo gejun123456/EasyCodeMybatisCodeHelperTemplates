@@ -49,18 +49,18 @@ public class $!{controllerName} {
     /**
      * 新增数据
      *
-     * @param $!{tool.firstLowerCase($tableInfo.name)} 实体
+     * @param $!{tool.firstLowerCase($entityName)} 实体
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<$!{entityName}> add($!{tableInfo.name} $!{tool.firstLowerCase($tableInfo.name)}) {
+    public ResponseEntity<$!{entityName}> add($!{entityName} $!{tool.firstLowerCase($entityName)}) {
         return ResponseEntity.ok(this.$!{tool.firstLowerCase($tableInfo.name)}Service.insert($!{tool.firstLowerCase($tableInfo.name)}));
     }
 
     /**
      * 编辑数据
      *
-     * @param $!{tool.firstLowerCase($tableInfo.name)} 实体
+     * @param $!{tool.firstLowerCase($entityName)} 实体
      * @return 编辑结果
      */
     @PutMapping
