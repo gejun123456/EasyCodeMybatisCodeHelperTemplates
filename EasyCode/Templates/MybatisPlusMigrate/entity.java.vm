@@ -17,7 +17,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 
 ##表注释（宏定义）
 #tableComment("表实体类")
-@SuppressWarnings("serial")
 #if(${useLombok})
 @Data
 #end
@@ -56,15 +55,7 @@ public class $!{entityName}  {
 
 
 #foreach($column in $tableInfo.pkColumn)
-    /**
-     * 获取主键值
-     *
-     * @return 主键值
-     */
-    @Override
-    protected Serializable pkVal() {
-        return this.$!column.name;
-    }
+
 #break
 #end
 }

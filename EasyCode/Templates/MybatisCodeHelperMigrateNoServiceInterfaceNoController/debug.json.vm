@@ -2,6 +2,10 @@
 $!callback.setWriteFile(false)
 
 #foreach($column in $tableInfo.fullColumn)
+ a.${column.obj.name} as ${tool.getJavaName($column.obj.name)}
+#end
+
+#foreach($column in $tableInfo.fullColumn)
     columName:${column.obj.getName()} columnType:${column.obj.dataType.specification} javaName:${column.name}
 #end
 

@@ -2,20 +2,16 @@
 $!callback.setWriteFile(false)
 
 
+
 #foreach($column in $tableInfo.fullColumn)
-    ${tableInfo.obj.name}.$column.obj.name#if($foreach) as `${tableInfo.obj.name}_${column.obj.name}`,
-#end#end
-
-
-
-
-
+columName:${column.obj.getName()} columnType:${column.obj.dataType.specification} javaName:${column.name}
+#end
 
 AllColumns is following:
-#foreach($column in $tableInfo.fullColumn)$column.obj.name#if($foreach.hasNext), #end#end
+    #foreach($column in $tableInfo.fullColumn)$column.obj.name#if($foreach.hasNext), #end#end
 
 Get Table Schema name:
-${tableInfo.obj.getParent().getName()}
+    ${tableInfo.obj.getParent().getName()}
 
 //获取原始列类型中的字段
 sqlType = $!tool.getField($tableInfo.fullColumn.get(0).obj.dataType, "typeName")

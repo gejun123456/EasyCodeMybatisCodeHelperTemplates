@@ -9,6 +9,7 @@ $!{mybatisCodehelper.vm}
 
 $!callback.setSavePath($daoSavePath)
 $!callback.setFileName($tool.append($daoName, ".java"))
+package ${mapperPackageName};
 
 import java.util.List;
 
