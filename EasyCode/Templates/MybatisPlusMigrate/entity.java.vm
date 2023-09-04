@@ -9,13 +9,13 @@ $!callback.setFileName($tool.append($entityName, ".java"))
 
 ##自动导入包（全局变量）
 package ${modelPackageName};
-$!autoImport
+
 import java.io.Serializable;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableName;
-
+$!{autoImport.vm}
 ##表注释（宏定义）
 #tableComment("表实体类")
 #if(${useLombok})
