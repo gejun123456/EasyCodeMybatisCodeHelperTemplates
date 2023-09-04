@@ -17,8 +17,6 @@ $!callback.setFileName($tool.append($controllerName, ".java"))
 ##定义实体对象名
 package ${controllerPackageName};
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.api.ApiController;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import $!{modelPackageName}.$!{entityName};
 import ${servicePackageName}.$!{tableInfo.name}Service;

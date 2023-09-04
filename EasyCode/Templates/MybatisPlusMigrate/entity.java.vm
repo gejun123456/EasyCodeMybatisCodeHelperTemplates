@@ -14,6 +14,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 ##表注释（宏定义）
 #tableComment("表实体类")
@@ -26,6 +27,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 #if($useOpenApi)
 @Schema(name = "$!{entityName}", description = "$!{tableInfo.comment}")
 #end
+@TableName(value = "${tableInfo.obj.name}")
 public class $!{entityName}  {
 #foreach($column in $tableInfo.fullColumn)
     #if(${column.comment})/**
