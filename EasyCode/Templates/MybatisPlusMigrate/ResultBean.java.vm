@@ -1,4 +1,5 @@
 $!callback.setWriteFile(false)
+##copy class to your project, example is from: https://github.com/gejun123456/exception-handler-demo
 package com.utils;
 public class ResultBean<T> {
     private int code;
