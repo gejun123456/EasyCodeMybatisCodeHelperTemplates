@@ -44,7 +44,7 @@ public class $!{controllerName}  {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
+    @GetMapping("/getInfo/{id}")
     public ResultBean<$entityName> selectOne(@PathVariable Serializable id) {
         return ResultBean.success(this.$!{serviceName}.getById(id));
     }
@@ -55,7 +55,7 @@ public class $!{controllerName}  {
      * @param $!entityVariableName 实体对象
      * @return 新增结果
      */
-    @PostMapping
+    @PostMapping("/save")
     public ResultBean insert(@RequestBody $!entityName $!entityVariableName) {
         this.$!{serviceName}.save($!entityVariableName);
         return ResultBean.success();
@@ -67,7 +67,7 @@ public class $!{controllerName}  {
      * @param $!entityVariableName 实体对象
      * @return 修改结果
      */
-    @PutMapping
+    @PutMapping("/update")
     public ResultBean update(@RequestBody $!entityName $!entityVariableName) {
         this.$!{serviceName}.updateById($!entityVariableName);
         return ResultBean.success();
@@ -79,7 +79,7 @@ public class $!{controllerName}  {
      * @param idList 主键结合
      * @return 删除结果
      */
-    @DeleteMapping
+    @DeleteMapping("/remove")
     public ResultBean delete(@RequestParam("idList") List<Long> idList) {
         this.$!{serviceName}.removeByIds(idList);
         return ResultBean.success();
