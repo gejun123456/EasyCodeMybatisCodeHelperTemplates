@@ -1,0 +1,111 @@
+##导入宏定义
+$!{define.vm}
+$!{mybatisCodehelper.vm}
+
+##设置表后缀（宏定义）
+#set($controllerName = $tool.append($tableInfo.name, "Controller"))
+##设置回调
+#set($controllerSavePath = $tool.append(${controllerSrcFolder},"/",${controllerPackageName.replace(".","/")}))
+
+$!callback.setSavePath($controllerSavePath)
+$!callback.setFileName($tool.append($controllerName, ".java"))
+
+##定义服务名
+#set($serviceClassName= $tool.append($tableInfo.name,"Service"))
+#set($serviceName = $tool.firstLowerCase($serviceClassName))
+#set($entityVariableName = $!tool.firstLowerCase($!entityName))
+##定义实体对象名
+package ${controllerPackageName};
+
+import $!{modelPackageName}.$!{entityName};
+import ${servicePackageName}.$!{tableInfo.name}Service;
+import org.springframework.web.bind.annotation.*;
+import com.mybatisflex.core.paginate.Page;
+import javax.annotation.Resource;
+import java.io.Serializable;
+import java.util.List;
+import com.utils.ResultBean;
+
+##表注释（宏定义）
+#tableComment("表控制层")
+@RestController
+@RequestMapping("$!tool.firstLowerCase($!tableInfo.name)")
+public class $!{controllerName}  {
+    /**
+     * 服务对象
+     */
+    @Resource
+    private ${serviceClassName} $!{serviceName};
+
+    /**
+     * 通过主键查询单条数据
+     *
+     * @param id 主键
+     * @return 单条数据
+     */
+    @GetMapping("/getInfo/{id}")
+    public ResultBean<$entityName> selectOne(@PathVariable Serializable id) {
+        return ResultBean.success(this.$!{serviceName}.getById(id));
+    }
+
+    /**
+     * 新增数据
+     *
+     * @param $!entityVariableName 实体对象
+     * @return 新增结果
+     */
+    @PostMapping("/save")
+    public ResultBean save(@RequestBody $!entityName $!entityVariableName) {
+        this.$!{serviceName}.save($!entityVariableName);
+        return ResultBean.success();
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param $!entityVariableName 实体对象
+     * @return 修改结果
+     */
+    @PutMapping("/update")
+    public ResultBean update(@RequestBody $!entityName $!entityVariableName) {
+        this.$!{serviceName}.updateById($!entityVariableName);
+        return ResultBean.success();
+    }
+
+    /**
+    * 查询所有
+    *
+    * @return 所有数据
+    */
+    @GetMapping("/list")
+    public ResultBean<List<${entityName}>> list() {
+        List<$entityName> ${entityVariableName}List = this.${serviceName}.list();
+        return ResultBean.success(${entityVariableName}List);
+    }
+
+
+    /**
+    * 分页查询
+    *
+    * @param page 分页对象
+    * @return 分页对象
+    */
+    @GetMapping("/page")
+    public ResultBean<Page<${entityName}>> page(Page<${entityName}> page) {
+        Page<${entityName}> pages = this.${serviceName}.page(page);
+        return ResultBean.success(pages);
+    }
+
+
+    /**
+     * 删除数据
+     *
+     * @param id 主键
+     * @return 删除结果
+     */
+    @DeleteMapping("/remove/{id}")
+    public ResultBean delete(@PathVariable Serializable id) {
+        this.$!{serviceName}.removeById(id);
+        return ResultBean.success();
+    }
+}

@@ -43,5 +43,14 @@
     "typeMapperName": "Default.json",
     "tableNameRegex": ".*",
     "schemaNameRegex": ".*"
+  },
+  {
+    "groupName": "MybatisFlex",
+    "templateName": "MybatisFlex",
+    "globalConfigName": "MybatisCodeHelperPro",
+    "columnConfigName": "Default.json",
+    "typeMapperName": "Default.json",
+    "tableNameRegex": ".*",
+    "schemaNameRegex": ".*"
   }
 ]

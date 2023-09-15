@@ -1,0 +1,63 @@
+##导入宏定义
+$!{define.vm}
+$!{mybatisCodehelper.vm}
+
+#set($entitySavePath = $tool.append(${javamodelSrcFolder},"/",${modelPackageName.replace(".","/")}))
+
+$!callback.setSavePath($entitySavePath)
+$!callback.setFileName($tool.append($entityName, ".java"))
+
+##自动导入包（全局变量）
+package ${modelPackageName};
+
+import java.io.Serializable;
+import com.mybatisflex.annotation.Column;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+$!{autoImport.vm}
+##表注释（宏定义）
+#tableComment("表实体类")
+#if(${useLombok})
+@Data
+#end
+#if($useSwagger)
+@ApiModel(value = "$!{entityName}", description = "$!{tableInfo.comment}")
+#end
+#if($useOpenApi)
+@Schema(name = "$!{entityName}", description = "$!{tableInfo.comment}")
+#end
+@Table("${tableInfo.obj.name}")
+public class $!{entityName}  {
+#foreach($column in $tableInfo.fullColumn)
+    #if(${column.comment})/**
+     * ${column.comment}
+     */
+    #end
+#if($useSwagger)
+@ApiModelProperty(value = "${column.comment}")
+#end
+#if($useOpenApi)
+@Schema(description = "${column.comment}")
+#end
+#if(${column.obj.name} == ${tableInfo.pkColumn.get(0).obj.name})
+@Id(keyType = KeyType.Auto)
+#else
+@Column(value = "${column.obj.name}")
+#end
+    private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+#end
+
+#if($useLombok)
+#else
+#foreach($column in $tableInfo.fullColumn)
+    #getSetMethod($column)
+#end
+#end
+
+
+#foreach($column in $tableInfo.pkColumn)
+
+#break
+#end
+}

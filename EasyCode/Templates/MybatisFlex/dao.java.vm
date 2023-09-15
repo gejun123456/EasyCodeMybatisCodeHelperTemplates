@@ -1,0 +1,35 @@
+##导入宏定义
+$!{define.vm}
+$!{mybatisCodehelper.vm}
+
+##设置表后缀（宏定义）
+#set($daoName = $tool.append($tableInfo.name, ${daoSuffix}))
+##设置回调
+#set($daoSavePath = $tool.append(${mapperSrcFolder},"/",${mapperPackageName.replace(".","/")}))
+
+$!callback.setSavePath($daoSavePath)
+$!callback.setFileName($tool.append($daoName, ".java"))
+package ${mapperPackageName};
+
+import java.util.List;
+
+import com.mybatisflex.core.BaseMapper;
+import com.mybatisflex.core.query.QueryWrapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import $!{modelPackageName}.$!{entityName};
+
+##表注释（宏定义）
+#tableComment("表数据库访问层")
+public interface $!{daoName} extends BaseMapper<$!entityName> {
+
+/**
+* 批量新增或按主键更新数据（MyBatis原生foreach方法）
+*
+* @param entities List<$!{entityName}> 实例对象列表
+* @return 影响行数
+* @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
+*/
+int insertOrUpdateBatch(@Param("entities") List<$!{entityName}> entities);
+
+}

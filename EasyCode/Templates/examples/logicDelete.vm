@@ -6,6 +6,13 @@ $!{mybatisSupport.vm}
 $!callback.setSavePath($XmlSavePath)
 $!callback.setFileName($tool.append($!{tableInfo.name}, $!{mapperSuffix},".xml"))
 
+#set($logicDelete=false)
+#foreach($column in $tableInfo.fullColumn)
+    #if($column.obj.name.equals("del_flag"))
+        #set($logicDelete=true)
+    #end
+#end
+
 #set($daoName = $tool.append($tableInfo.name, ${daoSuffix}))
 
 
@@ -32,19 +39,22 @@ $!callback.setFileName($tool.append($!{tableInfo.name}, $!{mapperSuffix},".xml")
         #allSqlColumn()
     </sql>
 
-
-
     <!--查询单个-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from $!tableInfo.obj.name
-        where $!pk.obj.name = #{$!pk.name,jdbcType=${pk.ext.jdbcType}}
+        where $!pk.obj.name = #{$!pk.name,jdbcType=${pk.ext.jdbcType}}#if($logicDelete) and del_flag = 0
+#end
     </select>
 
     <!--通过主键删除-->
     <delete id="deleteByPrimaryKey">
+#if($logicDelete)
+        update $!{tableInfo.obj.name} set del_flag = 1 where $!pk.obj.name = #{$!pk.name,jdbcType=${pk.ext.jdbcType}}
+#else
         delete from $!{tableInfo.obj.name} where $!pk.obj.name = #{$!pk.name,jdbcType=${pk.ext.jdbcType}}
+#end
     </delete>
 
 
@@ -94,7 +104,8 @@ $!callback.setFileName($tool.append($!{tableInfo.name}, $!{mapperSuffix},".xml")
         select
           #allSqlColumn()
 
-        from $!{tableInfo.obj.parent.name}.$!tableInfo.obj.name
+        from $!{tableInfo.obj.parent.name}.$!tableInfo.obj.name #if($logicDelete) where del_flag = 0
+#end
     </select>
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
@@ -105,6 +116,7 @@ $!callback.setFileName($tool.append($!{tableInfo.name}, $!{mapperSuffix},".xml")
             <if test="$!column.name != null#if($column.type.equals("java.lang.String")) and $!column.name != ''#end">
                 and $!column.obj.name = #{$!column.name}
             </if>
+#end#if($logicDelete)            and del_flag = 0
 #end
         </where>
     </select>
