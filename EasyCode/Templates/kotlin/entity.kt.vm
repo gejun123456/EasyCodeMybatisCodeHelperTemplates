@@ -1,0 +1,30 @@
+##引入宏定义
+$!{define.vm}
+$!{mybatisCodehelper.vm}
+
+##使用宏定义设置回调（保存位置与文件后缀）
+#save("/entity", ".kt")
+
+##使用宏定义设置包后缀
+#setPackageSuffix("entity")
+
+##使用全局变量实现默认包导入
+$!{autoImport.vm}
+import java.io.Serializable;
+
+##使用宏定义实现类注释信息
+#tableComment("实体类")
+class $!{tableInfo.name}:Serializable {
+#foreach($column in $tableInfo.fullColumn)
+    #if(${column.comment})/**
+    * ${column.comment}
+    */#end
+
+    private var $!{column.name}:$!{tool.getClsNameByFullName($column.ktShortType)}?=null
+#end
+
+    companion object {
+        private const val serialVersionUID = $!tool.serial()
+    }
+
+}

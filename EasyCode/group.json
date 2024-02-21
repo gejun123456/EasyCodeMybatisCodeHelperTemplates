@@ -52,5 +52,15 @@
     "typeMapperName": "Default.json",
     "tableNameRegex": ".*",
     "schemaNameRegex": ".*"
+  },
+  {
+    "groupName": "Kotlin",
+    "templateName": "kotlin",
+    "globalConfigName": "MybatisCodeHelperPro",
+    "columnConfigName": "Default.json",
+    "typeMapperName": "Default.json",
+    "tableNameRegex": ".*",
+    "schemaNameRegex": ".*"
   }
+
 ]
